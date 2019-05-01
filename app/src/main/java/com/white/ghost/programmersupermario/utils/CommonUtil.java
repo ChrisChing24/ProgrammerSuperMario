@@ -6,9 +6,10 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
-import android.support.annotation.RequiresApi;
 
 import java.io.File;
+
+import androidx.annotation.RequiresApi;
 
 /**
  * Function:常用工具类

@@ -7,7 +7,6 @@ import android.content.res.Configuration;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Environment;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import java.io.File;
@@ -18,11 +17,12 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.annotation.Nullable;
+
 /**
  * Function: 设备相关工具类
  * Author Name: Chris
  * Date: 2019/4/30 11:34
- * Copyright © 2006-2018 高顿网校, All Rights Reserved.
  */
 
 public class DeviceUtil {

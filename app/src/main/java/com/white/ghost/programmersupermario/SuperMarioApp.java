@@ -20,7 +20,8 @@ public class SuperMarioApp extends Application {
         super.onCreate();
         sSuperMarioApp = this;
         // 用于监测内存泄漏，一旦有则显示在log里，debug时会多安装一个"Leaks"的app
-        //在leakCanary SDK1.5以前，Android 6.0以上系统可能会报FATAL EXCEPTION: IntentService[HeapAnalyzerService]
+        //在leakCanary SDK1.5以前，Android 6.0以上系统可能会报
+        // FATAL EXCEPTION: IntentService[HeapAnalyzerService]
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.

@@ -18,7 +18,7 @@
 
     <!--闪屏页主题-->
     <style name="SplashScreenTheme" parent="AppTheme">
-        <item name="android:windowBackground">@color/window_background</item>
+        <!--<item name="android:windowBackground">@color/window_background</item>-->
         <item name="android:windowNoTitle">true</item>
     </style>
 </resources>

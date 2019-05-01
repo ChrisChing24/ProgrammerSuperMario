@@ -5,9 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.IntDef;
-import android.support.v4.view.ViewCompat;
+
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,6 +14,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntDef;
+import androidx.core.view.ViewCompat;
 
 /**
  * Function: 状态栏工具类
@@ -33,7 +35,8 @@ public class StatusBarUtil {
     public static float sVirtualDensity = -1;
     public static float sVirtualDensityDpi = -1;
     private static int sStatusbarHeight = -1;
-    private static @StatusBarType int mStatuBarType = STATUSBAR_TYPE_DEFAULT;
+    private static @StatusBarType
+    int mStatuBarType = STATUSBAR_TYPE_DEFAULT;
     private static Integer sTransparentValue;
 
     public static void translucent(Activity activity) {
@@ -69,9 +72,9 @@ public class StatusBarUtil {
         }
 
         //android p 加这句判断
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-//            handleDisplayCutoutMode(window);
-//        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            handleDisplayCutoutMode(window);
+        }
 
         // 小米和魅族4.4 以上版本支持沉浸式
         // 小米 Android 6.0 ，开发版 7.7.13 及以后版本设置黑色字体又需要 clear FLAG_TRANSLUCENT_STATUS, 因此还原为官方模式
@@ -113,39 +116,39 @@ public class StatusBarUtil {
         }
     }
 
-//    @TargetApi(28)
-//    private static void handleDisplayCutoutMode(final Window window) {
-//        View decorView = window.getDecorView();
-//        if (decorView != null) {
-//            if (ViewCompat.isAttachedToWindow(decorView)) {
-//                realHandleDisplayCutoutMode(window, decorView);
-//            } else {
-//                decorView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
-//                    @Override
-//                    public void onViewAttachedToWindow(View v) {
-//                        v.removeOnAttachStateChangeListener(this);
-//                        realHandleDisplayCutoutMode(window, v);
-//                    }
-//
-//                    @Override
-//                    public void onViewDetachedFromWindow(View v) {
-//
-//                    }
-//                });
-//            }
-//        }
-//    }
+    @TargetApi(28)
+    private static void handleDisplayCutoutMode(final Window window) {
+        View decorView = window.getDecorView();
+        if (decorView != null) {
+            if (ViewCompat.isAttachedToWindow(decorView)) {
+                realHandleDisplayCutoutMode(window, decorView);
+            } else {
+                decorView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+                    @Override
+                    public void onViewAttachedToWindow(View v) {
+                        v.removeOnAttachStateChangeListener(this);
+                        realHandleDisplayCutoutMode(window, v);
+                    }
 
-//    @TargetApi(28)
-//    private static void realHandleDisplayCutoutMode(Window window, View decorView) {
-//        if (decorView.getRootWindowInsets() != null &&
-//                decorView.getRootWindowInsets().getDisplayCutout() != null) {
-//            WindowManager.LayoutParams params = window.getAttributes();
-//            params.layoutInDisplayCutoutMode = WindowManager.LayoutParams
-//                    .LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
-//            window.setAttributes(params);
-//        }
-//    }
+                    @Override
+                    public void onViewDetachedFromWindow(View v) {
+
+                    }
+                });
+            }
+        }
+    }
+
+    @TargetApi(28)
+    private static void realHandleDisplayCutoutMode(Window window, View decorView) {
+        if (decorView.getRootWindowInsets() != null &&
+                decorView.getRootWindowInsets().getDisplayCutout() != null) {
+            WindowManager.LayoutParams params = window.getAttributes();
+            params.layoutInDisplayCutoutMode = WindowManager.LayoutParams
+                    .LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            window.setAttributes(params);
+        }
+    }
 
     /**
      * 设置状态栏黑色字体图标，
@@ -230,6 +233,7 @@ public class StatusBarUtil {
         return out;
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static int retainSystemUiFlag(Window window, int out, int type) {
         int now = window.getDecorView().getSystemUiVisibility();
         if ((now & type) == type) {
