@@ -1,5 +1,6 @@
 package com.white.ghost.programmersupermario.module;
 
+import com.white.ghost.programmersupermario.R;
 import com.white.ghost.programmersupermario.base.BaseActivity;
 
 /**
@@ -11,7 +12,7 @@ import com.white.ghost.programmersupermario.base.BaseActivity;
 public class LoginActivity extends BaseActivity {
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.activity_login;
     }
 
     @Override
@@ -19,8 +20,4 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void initToolBar() {
-
-    }
 }

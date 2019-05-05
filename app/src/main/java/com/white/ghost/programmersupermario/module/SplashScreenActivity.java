@@ -2,12 +2,8 @@ package com.white.ghost.programmersupermario.module;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
-import android.os.Handler;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.snackbar.Snackbar;
 import com.white.ghost.programmersupermario.R;
 import com.white.ghost.programmersupermario.base.BaseActivity;
@@ -32,14 +28,12 @@ import butterknife.OnClick;
 /**
  * Function: 闪屏页
  * Author Name: Chris
- * Date: 2019/4/30 14:ms
+ * Date: 2019/4/30 14:33
  */
 
 public class SplashScreenActivity extends BaseActivity {
     @BindView(R.id.banner_splash)
     Banner mBanner;
-    @BindView(R.id.iv_splash)
-    ImageView mIvSplash;
     private List<String> mImageList = new ArrayList<>();
 
     @Override
@@ -49,20 +43,8 @@ public class SplashScreenActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        Glide.with(this)
-                .asGif()
-                .centerCrop()
-                .load(R.mipmap.marvel_logo)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(mIvSplash);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getImageList();
-                initBanner();
-            }
-        }, 6000);
-
+        getImageList();
+        initBanner();
     }
 
 
@@ -85,7 +67,9 @@ public class SplashScreenActivity extends BaseActivity {
         mBanner.start();
     }
 
-    //获取json文件中的所有图片地址
+    /**
+     * 获取json文件中的所有图片地址
+     */
     private void getImageList() {
         //将json数据变成字符串
         StringBuilder stringBuilder = new StringBuilder();
@@ -117,7 +101,7 @@ public class SplashScreenActivity extends BaseActivity {
 
     @OnClick(R.id.fab_splash)
     public void onViewClicked(View view) {
-        Snackbar.make(view, "确定进入登录页面吗？", Snackbar.LENGTH_SHORT)
+        Snackbar.make(view, "确定进入登录页面吗？", Snackbar.LENGTH_LONG)
                 .setActionTextColor(getResources().getColor(R.color.app_main_color))
                 .setAction("确定", v ->
                         startActivity(new Intent(SplashScreenActivity.this,
