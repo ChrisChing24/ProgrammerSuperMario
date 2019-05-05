@@ -1,9 +1,5 @@
 package com.white.ghost.programmersupermario.module;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import com.white.ghost.programmersupermario.R;
 import com.white.ghost.programmersupermario.base.BaseActivity;
 
 /**

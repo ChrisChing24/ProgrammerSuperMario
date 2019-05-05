@@ -18,7 +18,33 @@
 
     <!--闪屏页主题-->
     <style name="SplashScreenTheme" parent="AppTheme">
-        <!--<item name="android:windowBackground">@color/window_background</item>-->
+        <item name="android:windowBackground">@mipmap/marvel_studios_logo</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
+    <!-- 向右箭头 -->
+    <style name="NextIconStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@mipmap/icon_right_arrow</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:contentDescription">@string/image_contentDescription</item>
+    </style>
+
+    <!--蓝色大按钮   parent属性是去掉自带阴影-->
+    <style name="BtnBlueStyle" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:background">@drawable/shape_corner_round_blue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+
 </resources>

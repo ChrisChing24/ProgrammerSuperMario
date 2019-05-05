@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.trello.rxlifecycle3.components.RxActivity;
 import com.white.ghost.programmersupermario.SuperMarioApp;
+import com.white.ghost.programmersupermario.utils.StatusBarUtil;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -24,6 +25,7 @@ public abstract class BaseActivity extends RxActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         mBind = ButterKnife.bind(this);
+        StatusBarUtil.translucent(this);
         getResources();
         initViews();
     }
@@ -43,7 +45,12 @@ public abstract class BaseActivity extends RxActivity {
      * 初始化toolbar
      */
     public void initToolBar() {
+    }
 
+    /**
+     * 初始化其他各种view
+     */
+    public void initOtherView() {
     }
 
 

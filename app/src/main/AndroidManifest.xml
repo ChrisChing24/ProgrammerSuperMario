@@ -4,12 +4,13 @@
     package="com.white.ghost.programmersupermario">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:name=".SuperMarioApp"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/marvel_studios_10_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/marvel_studios_10_logo"
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme">
         <activity android:name=".module.MainActivity" />
