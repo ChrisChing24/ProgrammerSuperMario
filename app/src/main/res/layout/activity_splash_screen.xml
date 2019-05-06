@@ -5,10 +5,29 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <ImageView
+        android:id="@+id/iv_splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/image_contentDescription" />
+
+    <TextView
+        android:id="@+id/tv_splash_countdown_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:padding="8dp"
+        android:text="@string/splash_skip"
+        android:textColor="@color/text_black"
+        android:textSize="16sp" />
+
     <com.youth.banner.Banner
         android:id="@+id/banner_splash"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_splash"
@@ -16,8 +35,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_margin="20dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="20dp"
         android:src="@mipmap/icon_right_arrow"
+        android:visibility="gone"
         app:backgroundTint="@color/app_main_color"
         app:borderWidth="0dp"
         app:elevation="0dp"

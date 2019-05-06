@@ -1,6 +1,9 @@
 package com.white.ghost.programmersupermario.utils;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -8,8 +11,6 @@ import android.os.Environment;
 import android.os.StatFs;
 
 import java.io.File;
-
-import androidx.annotation.RequiresApi;
 
 /**
  * Function:常用工具类
@@ -71,7 +72,7 @@ public class CommonUtil {
     /**
      * 获取手机SD卡总空间
      */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     private static long getSDCardTotalSize() {
         if (checkSdCard()) {
             File path = Environment.getExternalStorageDirectory();
@@ -88,7 +89,7 @@ public class CommonUtil {
     /**
      * 获取SDka可用空间
      */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     private static long getSDCardAvailableSize() {
         if (checkSdCard()) {
             File path = Environment.getExternalStorageDirectory();
@@ -105,7 +106,7 @@ public class CommonUtil {
     /**
      * 获取手机内部存储总空间
      */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     public static long getPhoneTotalSize() {
         if (!checkSdCard()) {
             File path = Environment.getDataDirectory();
@@ -122,7 +123,7 @@ public class CommonUtil {
     /**
      * 获取手机内存存储可用空间
      */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     public static long getPhoneAvailableSize() {
         if (!checkSdCard()) {
             File path = Environment.getDataDirectory();
@@ -132,5 +133,21 @@ public class CommonUtil {
             return blockSizeLong * availableBlocksLong;
         } else
             return getSDCardAvailableSize();
+    }
+
+    /**
+     * 获取本地版本号
+     *
+     * @return 版本号
+     */
+    public static String getLocalVersion(Context context) {
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            return info.versionName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.toString();
+        }
     }
 }

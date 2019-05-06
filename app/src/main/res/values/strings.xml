@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">ProgrammerSuperMario</string>
     <string name="image_contentDescription">image_contentDescription</string>
+    <string name="wisdom_school">智慧校园</string>
+    <string name="username_hint">账号/手机号</string>
+    <string name="password_hint">密码</string>
+    <string name="login">登录</string>
+    <string name="splash_skip">跳过 5s</string>
+    <string name="progress_loading">请稍候...</string>
 </resources>

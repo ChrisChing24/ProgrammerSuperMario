@@ -2,11 +2,21 @@ package com.white.ghost.programmersupermario.module;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.drawable.GradientDrawable;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.white.ghost.programmersupermario.R;
 import com.white.ghost.programmersupermario.base.BaseActivity;
+import com.white.ghost.programmersupermario.utils.CommonUtil;
+import com.white.ghost.programmersupermario.utils.ConstantUtil;
+import com.white.ghost.programmersupermario.utils.DisplayUtil;
+import com.white.ghost.programmersupermario.utils.SpUtil;
 import com.white.ghost.programmersupermario.widget.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -21,20 +31,35 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Function: 闪屏页
  * Author Name: Chris
  * Date: 2019/4/30 14:33
  */
-
 public class SplashScreenActivity extends BaseActivity {
     @BindView(R.id.banner_splash)
     Banner mBanner;
+    @BindView(R.id.fab_splash)
+    FloatingActionButton mFabSplash;
+    @BindView(R.id.iv_splash)
+    ImageView mIvSplash;
+    @BindView(R.id.tv_splash_countdown_time)
+    TextView mTvCountdownTime;
+    private static final String TAG = "SplashScreenActivity";
+    private static final int COUNTDOWN_MAX_VALUE = 6;
     private List<String> mImageList = new ArrayList<>();
+    private boolean isFirstEnter;
+    private Disposable mDisposable;
 
     @Override
     public int getLayoutId() {
@@ -42,9 +67,62 @@ public class SplashScreenActivity extends BaseActivity {
     }
 
     @Override
-    public void initViews() {
+    public void init() {
+        getExtraData();
+        initViews();
+        startCountdown();
         getImageList();
         initBanner();
+    }
+
+    @Override
+    public void getExtraData() {
+        ConstantUtil.sVersion = CommonUtil.getLocalVersion(this);
+        isFirstEnter = SpUtil.getBoolean(ConstantUtil.Key.IS_FIRST_ENTER, true);
+        if (isFirstEnter) {
+            SpUtil.putBoolean(ConstantUtil.Key.IS_FIRST_ENTER, false);
+        }
+    }
+
+    @Override
+    public void initViews() {
+        Glide.with(this)
+                .load(R.mipmap.avengers_bg)
+                .centerCrop()
+                .into(mIvSplash);
+        //设置背景
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setCornerRadius(DisplayUtil.dp2px(this, 25));
+        drawable.setStroke(DisplayUtil.dp2px(this, 1),
+                getResources().getColor(R.color.text_black));
+        mTvCountdownTime.setBackground(drawable);
+    }
+
+    private void startCountdown() {
+        //设置倒计时
+        mDisposable = Observable.interval(0, 1, TimeUnit.SECONDS)
+                .take(COUNTDOWN_MAX_VALUE)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aLong -> {
+                    long time = COUNTDOWN_MAX_VALUE - (aLong + 1);
+                    Log.i(TAG, String.valueOf(time));
+                    if (time > 0) {
+                        mTvCountdownTime.setText(String.format(Locale.getDefault(),
+                                "跳过 %ds", time));
+                    } else {
+                        if (isFirstEnter) {
+                            mIvSplash.setVisibility(View.GONE);
+                            mTvCountdownTime.setVisibility(View.GONE);
+                            mBanner.setVisibility(View.VISIBLE);
+                            mFabSplash.setVisibility(View.VISIBLE);
+                        } else {
+                            startActivity(new Intent(SplashScreenActivity.this,
+                                    LoginActivity.class));
+                            finish();
+                        }
+                    }
+                });
     }
 
 
@@ -98,14 +176,34 @@ public class SplashScreenActivity extends BaseActivity {
         }
     }
 
-
-    @OnClick(R.id.fab_splash)
+    @OnClick({R.id.tv_splash_countdown_time, R.id.fab_splash})
     public void onViewClicked(View view) {
-        Snackbar.make(view, "确定进入登录页面吗？", Snackbar.LENGTH_LONG)
-                .setActionTextColor(getResources().getColor(R.color.app_main_color))
-                .setAction("确定", v ->
-                        startActivity(new Intent(SplashScreenActivity.this,
-                                LoginActivity.class)))
-                .show();
+        switch (view.getId()) {
+            case R.id.tv_splash_countdown_time://跳过
+                startActivity(new Intent(SplashScreenActivity.this,
+                        LoginActivity.class));
+                finish();
+                break;
+            case R.id.fab_splash:
+                Snackbar.make(mFabSplash, "确定进入登录页面吗？", Snackbar.LENGTH_LONG)
+                        .setActionTextColor(getResources().getColor(R.color.app_main_color))
+                        .setAction("确定", (View v) -> {
+                            startActivity(new Intent(SplashScreenActivity.this,
+                                    LoginActivity.class));
+                            finish();
+                        })
+                        .show();
+                break;
+        }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mDisposable != null && !mDisposable.isDisposed()) {
+            mDisposable.dispose();
+        }
+    }
+
+
 }

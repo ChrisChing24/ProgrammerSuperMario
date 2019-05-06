@@ -14,6 +14,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--EditText提示文字颜色-->
+        <item name="android:textColorHint">@color/text_gray</item>
+        <!--TextInputEditText未操作时下划线和字体颜色-->
+        <item name="colorControlNormal">@color/text_gray</item>
+        <!--TextInputEditText操作时下划线和字体颜色-->
+        <item name="colorControlActivated">@color/app_main_color</item>
+        <item name="colorControlHighlight">@color/app_main_color</item>
+
     </style>
 
     <!--闪屏页主题-->
@@ -44,6 +52,18 @@
         <item name="android:textSize">16sp</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="CustomAlertDialogTheme" parent="AlertDialog.AppCompat.Light">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
 

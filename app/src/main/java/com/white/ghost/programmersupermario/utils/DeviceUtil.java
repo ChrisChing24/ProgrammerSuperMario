@@ -7,17 +7,26 @@ import android.content.res.Configuration;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Environment;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Properties;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import androidx.annotation.Nullable;
+
+import static android.content.Context.TELEPHONY_SERVICE;
+import static android.provider.Settings.Secure.getString;
 
 /**
  * Function: 设备相关工具类
@@ -263,5 +272,34 @@ public class DeviceUtil {
         }
         if (name != null) name = name.toLowerCase();
         return name;
+    }
+
+    // 获取设备唯一标识符，并储存
+    public static String getDeviceId(Context context) {
+        String deviceUuid;
+        try {
+            String deviceId = Settings.Secure.getString(context.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+            deviceUuid = new UUID(deviceId.hashCode(), ((long) deviceId.hashCode() << 32)).toString();
+            if (TextUtils.isEmpty(deviceUuid)) {
+                deviceUuid = UUID.randomUUID().toString();
+            }
+            return deviceUuid;
+        } catch (SecurityException e) { // android系统6.0，target
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 隐藏键盘
+     * @param context
+     * @param editText
+     */
+    public static void hideKeyBoard(Context context, View editText) {
+        if (editText == null) {
+            return;
+        }
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 }

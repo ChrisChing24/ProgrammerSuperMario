@@ -3,11 +3,17 @@ package com.white.ghost.programmersupermario.base;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.trello.rxlifecycle3.components.RxActivity;
+import com.white.ghost.programmersupermario.R;
 import com.white.ghost.programmersupermario.SuperMarioApp;
 import com.white.ghost.programmersupermario.utils.StatusBarUtil;
 
+import androidx.appcompat.app.AlertDialog;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -19,6 +25,7 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends RxActivity {
 
     private Unbinder mBind;
+    private AlertDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +34,7 @@ public abstract class BaseActivity extends RxActivity {
         mBind = ButterKnife.bind(this);
         StatusBarUtil.translucent(this);
         getResources();
-        initViews();
+        init();
     }
 
 
@@ -37,9 +44,15 @@ public abstract class BaseActivity extends RxActivity {
     public abstract int getLayoutId();
 
     /**
+     * 所有的初始化
+     */
+    public abstract void init();
+
+    /**
      * 初始化views
      */
-    public abstract void initViews();
+    public void initViews() {
+    }
 
     /**
      * 初始化toolbar
@@ -48,11 +61,10 @@ public abstract class BaseActivity extends RxActivity {
     }
 
     /**
-     * 初始化其他各种view
+     * 获取一些intent或其他数据
      */
-    public void initOtherView() {
+    public void getExtraData() {
     }
-
 
     /**
      * 加载数据
@@ -73,6 +85,35 @@ public abstract class BaseActivity extends RxActivity {
     }
 
     /**
+     * 显示加载框
+     */
+    public void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new AlertDialog
+                    .Builder(this, R.style.CustomAlertDialogTheme)
+                    .create();
+        }
+        View view = View.inflate(this, R.layout.layout_progress_dialog, null);
+        mProgressDialog.setView(view, 0, 0, 0, 0);
+        mProgressDialog.setCancelable(true);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        Window window = mProgressDialog.getWindow();
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.alpha = 1f;
+        window.setAttributes(layoutParams);
+        mProgressDialog.show();
+    }
+
+    /**
+     * 隐藏加载框
+     */
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    /**
      * 初始化recyclerView
      */
     public void initRecyclerView() {
@@ -88,6 +129,12 @@ public abstract class BaseActivity extends RxActivity {
      * 设置数据显示
      */
     public void setData() {
+    }
+
+    /**
+     * 展示空布局
+     */
+    public void showEmptyLayout() {
     }
 
     @Override
