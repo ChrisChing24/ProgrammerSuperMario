@@ -138,24 +138,24 @@ public class LoginActivity extends BaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(bindToLifecycle())
-                .subscribe(new Consumer<LoginBean>() {
-                    @Override
-                    public void accept(LoginBean loginBean) throws Exception {
-                        hideProgressDialog();
-                        SpUtil.put(ConstantUtil.Key.USERNAME, mUsername);
-                        SpUtil.put(ConstantUtil.Key.PASSWORD, mPassword);
-                        if (loginBean.getErrorResponse() != null) {
-                            BaseResponse.ErrorResponse errorResponse = loginBean.getErrorResponse();
-                            ToastUtil.ShortToast(errorResponse.getMsg());
-                        }
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        hideProgressDialog();
-                    }
+                .subscribe(baseResponse -> {
+                    hideProgressDialog();
+                    setData(baseResponse);
+                }, throwable -> {
+                    hideProgressDialog();
+                    ToastUtil.ShortToast(throwable.getMessage());
                 });
     }
 
-
+    @Override
+    public void setData(BaseResponse baseResponse) {
+        SpUtil.put(ConstantUtil.Key.USERNAME, mUsername);
+        SpUtil.put(ConstantUtil.Key.PASSWORD, mPassword);
+        if (baseResponse.getErrorResponse() != null) {
+            BaseResponse.ErrorResponse errorResponse = baseResponse.getErrorResponse();
+            ToastUtil.ShortToast(errorResponse.getMsg());
+        } else if (baseResponse.getResponse() != null) {
+            LoginBean loginBean = (LoginBean) baseResponse.getResponse();
+        }
+    }
 }

@@ -8,18 +8,18 @@ import com.google.gson.annotations.SerializedName;
  * Author Name: Chris
  * Date: 2019/5/6 15:12
  */
-public class BaseResponse {
-    private Response response;
+public class BaseResponse<T> {
+    private T response;
     @SerializedName("error_response")
     private ErrorResponse errorResponse;
     private Integer code;
     private String msg;
 
-    public Response getResponse() {
+    public T getResponse() {
         return response;
     }
 
-    public void setResponse(Response response) {
+    public void setResponse(T response) {
         this.response = response;
     }
 
@@ -69,7 +69,7 @@ public class BaseResponse {
         }
     }
 
-    private class Response {
+    public class Response {
         private int code;
         private String msg;
 

@@ -26,7 +26,7 @@ public interface MainService {
     //登录接口
     @FormUrlEncoded
     @POST("/api/?method=user.login")
-    Observable<LoginBean> login(@FieldMap Map<String, String> map);
+    Observable<BaseResponse> login(@FieldMap Map<String, String> map);
 
     //获取版本号
     @FormUrlEncoded

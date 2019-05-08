@@ -128,7 +128,7 @@ public abstract class BaseActivity extends RxActivity {
     /**
      * 设置数据显示
      */
-    public void setData() {
+    public void setData(BaseResponse baseResponse) {
     }
 
     /**

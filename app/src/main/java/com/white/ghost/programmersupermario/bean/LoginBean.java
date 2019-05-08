@@ -7,5 +7,6 @@ import com.white.ghost.programmersupermario.base.BaseResponse;
  * Author Name: Chris
  * Date: 2019/5/6 15:34
  */
-public class LoginBean extends BaseResponse {
+public class LoginBean {
+
 }
