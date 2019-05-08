@@ -3,7 +3,6 @@ package com.white.ghost.programmersupermario.base;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,6 +15,8 @@ import com.white.ghost.programmersupermario.utils.StatusBarUtil;
 import androidx.appcompat.app.AlertDialog;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Function: base
@@ -26,6 +27,7 @@ public abstract class BaseActivity extends RxActivity {
 
     private Unbinder mBind;
     private AlertDialog mProgressDialog;
+    private CompositeDisposable mCompositeDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,10 +139,27 @@ public abstract class BaseActivity extends RxActivity {
     public void showEmptyLayout() {
     }
 
+    /**
+     * 添加RxJava事件
+     *
+     * @param disposable 事件
+     */
+    public void addDisposable(Disposable disposable) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+        mCompositeDisposable.add(disposable);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //黄油刀unBind
         mBind.unbind();
+        //清空所有事件
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
+        }
         //添加leakCanary监测
         SuperMarioApp.getRefWatcher().watch(this);
     }

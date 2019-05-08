@@ -2,7 +2,6 @@ package com.white.ghost.programmersupermario.module;
 
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -26,7 +25,7 @@ import androidx.collection.ArrayMap;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -39,8 +38,6 @@ public class LoginActivity extends BaseActivity {
     TextInputEditText mEtUsername;
     @BindView(R.id.et_password)
     TextInputEditText mEtPassword;
-    @BindView(R.id.btn_login)
-    Button mBtnLogin;
     @BindView(R.id.til_username)
     TextInputLayout mTilUsername;
     @BindView(R.id.til_password)
@@ -133,7 +130,7 @@ public class LoginActivity extends BaseActivity {
         map.put("v", ConstantUtil.sVersion);
         map.put("device", "android");
         map.put("device_token", DeviceUtil.getDeviceId(this));
-        ApiBase.createApi(MainService.class)
+        Disposable disposable = ApiBase.createApi(MainService.class)
                 .login(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -145,17 +142,20 @@ public class LoginActivity extends BaseActivity {
                     hideProgressDialog();
                     ToastUtil.ShortToast(throwable.getMessage());
                 });
+        addDisposable(disposable);
     }
 
     @Override
     public void setData(BaseResponse baseResponse) {
         SpUtil.put(ConstantUtil.Key.USERNAME, mUsername);
         SpUtil.put(ConstantUtil.Key.PASSWORD, mPassword);
-        if (baseResponse.getErrorResponse() != null) {
-            BaseResponse.ErrorResponse errorResponse = baseResponse.getErrorResponse();
+        LoginBean loginBean = (LoginBean) baseResponse;
+        if (loginBean.getErrorResponse() != null) {
+            BaseResponse.ErrorResponse errorResponse = loginBean.getErrorResponse();
             ToastUtil.ShortToast(errorResponse.getMsg());
-        } else if (baseResponse.getResponse() != null) {
-            LoginBean loginBean = (LoginBean) baseResponse.getResponse();
+        } else if (loginBean.getResponse() != null) {
+            LoginBean.ResponseBean responseBean = loginBean.getResponse();
+            ToastUtil.ShortToast(responseBean.getMsg());
         }
     }
 }

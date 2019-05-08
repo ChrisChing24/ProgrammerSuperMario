@@ -8,20 +8,11 @@ import com.google.gson.annotations.SerializedName;
  * Author Name: Chris
  * Date: 2019/5/6 15:12
  */
-public class BaseResponse<T> {
-    private T response;
+public class BaseResponse {
     @SerializedName("error_response")
     private ErrorResponse errorResponse;
     private Integer code;
     private String msg;
-
-    public T getResponse() {
-        return response;
-    }
-
-    public void setResponse(T response) {
-        this.response = response;
-    }
 
     public ErrorResponse getErrorResponse() {
         return errorResponse;
@@ -69,24 +60,5 @@ public class BaseResponse<T> {
         }
     }
 
-    public class Response {
-        private int code;
-        private String msg;
 
-        public int getCode() {
-            return code;
-        }
-
-        public void setCode(int code) {
-            this.code = code;
-        }
-
-        public String getMsg() {
-            return msg;
-        }
-
-        public void setMsg(String msg) {
-            this.msg = msg;
-        }
-    }
 }
