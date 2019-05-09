@@ -2,6 +2,8 @@ package com.white.ghost.programmersupermario.bean;
 
 import com.white.ghost.programmersupermario.base.BaseResponse;
 
+import java.io.Serializable;
+
 /**
  * Function:登录接口返回数据
  * Author Name: Chris
@@ -10,7 +12,7 @@ import com.white.ghost.programmersupermario.base.BaseResponse;
 public class LoginBean extends BaseResponse {
 
     /**
-     * response : {"msg":"登录成功！","token":"OTFkMWx0ZlpGTWNiY2ZCbmhHc2lKSHE3U0RzQ01lRzZLelk4MkhRTEtPbUp6MzNFYlpVQXFkSitFaU9DKzZPTGVxL1NweUN0dFpPdmZvQ3ZqbUZjTHprMFNBODNCak5TM2RRdi8xQ1YrK3IxUEx5RzA2cnpoeTFReGQvRnNiRE1zdXZHUEE=","flag":false,"school":{"school_id":10055,"school_name":"晓信科技","school_img":"http://jiaowu-1252817547.file.myqcloud.com/formalPicture/201805111028069568.png"},"teacher_info":{"teacher_id":21648,"teacher_name":"杜中法","photo":"http://growthimage-1252817547.image.myqcloud.com/201708/49ad7a98-85f6-49af-b8a6-820cb0c1501f","account_number":"13045684793","teacher_type":2},"is_operate":false}
+     * response : {"msg":"登录成功！","token":"OTFkMWx0ZlpGTWNiY2ZCbmhHc2lKSHE3U0RzQ01lRzZLelk4MkhRTEtPbUp6MzNFYlpVQXFkSitFaU9DKzZPTGVxL1NweUN0dFpPdmZvQ3ZqbUZjTHprMFNBODNCak5TM2RRdi8xQ1YrK3IxUEx5RzA2cnpoeTFReGQvRnNiRE1zdXZHUEE=","flag":false,"ic_school_normal":{"school_id":10055,"school_name":"晓信科技","school_img":"http://jiaowu-1252817547.file.myqcloud.com/formalPicture/201805111028069568.png"},"teacher_info":{"teacher_id":21648,"teacher_name":"杜中法","photo":"http://growthimage-1252817547.image.myqcloud.com/201708/49ad7a98-85f6-49af-b8a6-820cb0c1501f","account_number":"13045684793","teacher_type":2},"is_operate":false}
      */
 
     private ResponseBean response;
@@ -28,7 +30,7 @@ public class LoginBean extends BaseResponse {
          * msg : 登录成功！
          * token : OTFkMWx0ZlpGTWNiY2ZCbmhHc2lKSHE3U0RzQ01lRzZLelk4MkhRTEtPbUp6MzNFYlpVQXFkSitFaU9DKzZPTGVxL1NweUN0dFpPdmZvQ3ZqbUZjTHprMFNBODNCak5TM2RRdi8xQ1YrK3IxUEx5RzA2cnpoeTFReGQvRnNiRE1zdXZHUEE=
          * flag : false
-         * school : {"school_id":10055,"school_name":"晓信科技","school_img":"http://jiaowu-1252817547.file.myqcloud.com/formalPicture/201805111028069568.png"}
+         * ic_school_normal : {"school_id":10055,"school_name":"晓信科技","school_img":"http://jiaowu-1252817547.file.myqcloud.com/formalPicture/201805111028069568.png"}
          * teacher_info : {"teacher_id":21648,"teacher_name":"杜中法","photo":"http://growthimage-1252817547.image.myqcloud.com/201708/49ad7a98-85f6-49af-b8a6-820cb0c1501f","account_number":"13045684793","teacher_type":2}
          * is_operate : false
          */
@@ -88,7 +90,7 @@ public class LoginBean extends BaseResponse {
             this.is_operate = is_operate;
         }
 
-        public static class SchoolBean {
+        public static class SchoolBean implements Serializable {
             /**
              * school_id : 10055
              * school_name : 晓信科技
@@ -124,7 +126,7 @@ public class LoginBean extends BaseResponse {
             }
         }
 
-        public static class TeacherInfoBean {
+        public static class TeacherInfoBean implements Serializable {
             /**
              * teacher_id : 21648
              * teacher_name : 杜中法

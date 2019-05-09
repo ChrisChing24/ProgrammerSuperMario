@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.trello.rxlifecycle3.components.RxActivity;
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 import com.white.ghost.programmersupermario.R;
 import com.white.ghost.programmersupermario.SuperMarioApp;
 import com.white.ghost.programmersupermario.utils.StatusBarUtil;
@@ -23,7 +24,7 @@ import io.reactivex.disposables.Disposable;
  * Author Name: Chris
  * Date: 2019/4/30 9:39
  */
-public abstract class BaseActivity extends RxActivity {
+public abstract class BaseActivity extends RxAppCompatActivity {
 
     private Unbinder mBind;
     private AlertDialog mProgressDialog;

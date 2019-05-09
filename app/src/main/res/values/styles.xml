@@ -21,7 +21,7 @@
         <!--TextInputEditText操作时下划线和字体颜色-->
         <item name="colorControlActivated">@color/app_main_color</item>
         <item name="colorControlHighlight">@color/app_main_color</item>
-
+        <item name="windowNoTitle">true</item>
     </style>
 
     <!--闪屏页主题-->
@@ -34,7 +34,7 @@
     <style name="NextIconStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:src">@mipmap/icon_right_arrow</item>
+        <item name="android:src">@mipmap/ic_right_arrow</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:contentDescription">@string/image_contentDescription</item>
@@ -54,6 +54,7 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <!--AlertDialog style-->
     <style name="CustomAlertDialogTheme" parent="AlertDialog.AppCompat.Light">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
@@ -66,5 +67,23 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
+    <!--toolbar 设置右上角设置白色小圆点-->
+    <style name="ToolbarOverflowTheme" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@mipmap/ic_menu_more_overflow</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+    </style>
+
+    <!--toolbar popupMenu-->
+    <style name="ToolbarPopupMenuTheme" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <!-- 设置popupMenu背景颜色-->
+        <item name="android:colorBackground">@color/white</item>
+        <!--设置popupMenu弹出位置不覆盖toolbar -->
+        <item name="overlapAnchor">false</item>
+        <!-- 修改字体大小 -->
+        <item name="android:textSize">15sp</item>
+        <!-- 修改字体颜色 -->
+        <item name="android:textColor">@color/text_black</item>
+    </style>
 
 </resources>

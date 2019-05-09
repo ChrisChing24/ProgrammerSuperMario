@@ -17,5 +17,9 @@ public class ConstantUtil {
         public static final String IS_FIRST_ENTER = "is_first_enter";
         public static final String USERNAME = "username";
         public static final String PASSWORD = "password";
+        public static final String TOKEN = "token";
+        public static final String SCHOOL_INFO = "school_info";
+        public static final String TEACHER_INFO = "teacher_info";
+        public static final String IS_LOGIN = "is_login";
     }
 }

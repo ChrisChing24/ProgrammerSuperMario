@@ -48,7 +48,7 @@ dependencies {
     //MaterialDesign控件库
     //    implementation 'com.github.navasmdc:MaterialDesign:1.5@aar'
     //5.0新控件,support库与Androidx不能共存，全部采用Androidx
-    implementation 'com.google.android.material:material:1.1.0-alpha05'
+    implementation 'com.google.android.material:material:1.1.0-alpha06'
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
     implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha04'
     implementation 'androidx.cardview:cardview:1.0.0'

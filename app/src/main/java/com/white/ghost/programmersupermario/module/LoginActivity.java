@@ -156,6 +156,13 @@ public class LoginActivity extends BaseActivity {
         } else if (loginBean.getResponse() != null) {
             LoginBean.ResponseBean responseBean = loginBean.getResponse();
             ToastUtil.ShortToast(responseBean.getMsg());
+            ConstantUtil.sToken = responseBean.getToken();
+            SpUtil.put(ConstantUtil.Key.TOKEN, ConstantUtil.sToken);
+            SpUtil.put(ConstantUtil.Key.IS_LOGIN, true);
+            if (!responseBean.isFlag()) {
+                MainActivity.launch(this, MainActivity.class,
+                        responseBean.getSchool(), responseBean.getTeacher_info());
+            }
         }
     }
 }

@@ -17,6 +17,7 @@ import com.white.ghost.programmersupermario.utils.CommonUtil;
 import com.white.ghost.programmersupermario.utils.ConstantUtil;
 import com.white.ghost.programmersupermario.utils.DisplayUtil;
 import com.white.ghost.programmersupermario.utils.SpUtil;
+import com.white.ghost.programmersupermario.utils.StatusBarUtil;
 import com.white.ghost.programmersupermario.widget.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -56,9 +57,19 @@ public class SplashScreenActivity extends BaseActivity {
     @BindView(R.id.tv_splash_countdown_time)
     TextView mTvCountdownTime;
     private static final String TAG = "SplashScreenActivity";
+    /**
+     * 倒计时最大值
+     */
     private static final int COUNTDOWN_MAX_VALUE = 6;
     private List<String> mImageList = new ArrayList<>();
+    /**
+     * 是否是第一次进入APP
+     */
     private boolean isFirstEnter;
+    /**
+     * 上次是否已经登录成功
+     */
+    private boolean isLogin;
     private Disposable mDisposable;
 
     @Override
@@ -68,6 +79,7 @@ public class SplashScreenActivity extends BaseActivity {
 
     @Override
     public void init() {
+        StatusBarUtil.setStatusBarLightMode(this);
         getExtraData();
         initViews();
         startCountdown();
@@ -78,7 +90,9 @@ public class SplashScreenActivity extends BaseActivity {
     @Override
     public void getExtraData() {
         ConstantUtil.sVersion = CommonUtil.getLocalVersion(this);
+        ConstantUtil.sToken = SpUtil.getString(ConstantUtil.Key.TOKEN, "");
         isFirstEnter = SpUtil.getBoolean(ConstantUtil.Key.IS_FIRST_ENTER, true);
+        isLogin = SpUtil.getBoolean(ConstantUtil.Key.IS_LOGIN, false);
         if (isFirstEnter) {
             SpUtil.putBoolean(ConstantUtil.Key.IS_FIRST_ENTER, false);
         }
@@ -94,7 +108,7 @@ public class SplashScreenActivity extends BaseActivity {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setCornerRadius(DisplayUtil.dp2px(this, 25));
         drawable.setStroke(DisplayUtil.dp2px(this, 1),
-                getResources().getColor(R.color.text_black));
+                getResources().getColor(R.color.app_main_color));
         mTvCountdownTime.setBackground(drawable);
     }
 
@@ -111,14 +125,18 @@ public class SplashScreenActivity extends BaseActivity {
                         mTvCountdownTime.setText(String.format(Locale.getDefault(),
                                 "跳过 %ds", time));
                     } else {
+                        //第一次进入APP则显示banner
                         if (isFirstEnter) {
                             mIvSplash.setVisibility(View.GONE);
                             mTvCountdownTime.setVisibility(View.GONE);
                             mBanner.setVisibility(View.VISIBLE);
                             mFabSplash.setVisibility(View.VISIBLE);
                         } else {
-                            startActivity(new Intent(SplashScreenActivity.this,
-                                    LoginActivity.class));
+                            if (isLogin) {
+                                startActivity(new Intent(this, MainActivity.class));
+                            } else {
+                                startActivity(new Intent(this, LoginActivity.class));
+                            }
                             finish();
                         }
                     }
@@ -180,8 +198,11 @@ public class SplashScreenActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_splash_countdown_time://跳过
-                startActivity(new Intent(SplashScreenActivity.this,
-                        LoginActivity.class));
+                if (isLogin) {
+                    startActivity(new Intent(this, MainActivity.class));
+                } else {
+                    startActivity(new Intent(this, LoginActivity.class));
+                }
                 finish();
                 break;
             case R.id.fab_splash:

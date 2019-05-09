@@ -20,7 +20,7 @@
         android:layout_marginTop="30dp"
         android:padding="8dp"
         android:text="@string/splash_skip"
-        android:textColor="@color/text_black"
+        android:textColor="@color/app_main_color"
         android:textSize="16sp" />
 
     <com.youth.banner.Banner
@@ -37,7 +37,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="50dp"
         android:layout_marginRight="20dp"
-        android:src="@mipmap/icon_right_arrow"
+        android:src="@mipmap/ic_right_arrow"
         android:visibility="gone"
         app:backgroundTint="@color/app_main_color"
         app:borderWidth="0dp"
