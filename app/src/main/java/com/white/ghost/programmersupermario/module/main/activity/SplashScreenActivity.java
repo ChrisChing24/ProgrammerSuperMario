@@ -1,4 +1,4 @@
-package com.white.ghost.programmersupermario.module;
+package com.white.ghost.programmersupermario.module.main.activity;
 
 import android.content.Intent;
 import android.content.res.AssetManager;

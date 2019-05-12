@@ -129,6 +129,12 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     }
 
     /**
+     * 初始化fragment
+     */
+    public void initFragment(){
+    }
+
+    /**
      * 设置数据显示
      */
     public void setData(BaseResponse baseResponse) {

@@ -1,4 +1,4 @@
-package com.white.ghost.programmersupermario.module;
+package com.white.ghost.programmersupermario.module.main.activity;
 
 import android.text.TextUtils;
 import android.view.View;
@@ -162,6 +162,7 @@ public class LoginActivity extends BaseActivity {
             if (!responseBean.isFlag()) {
                 MainActivity.launch(this, MainActivity.class,
                         responseBean.getSchool(), responseBean.getTeacher_info());
+                finish();
             }
         }
     }

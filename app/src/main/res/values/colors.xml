@@ -5,7 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFFFF</color>
     <!--app主题色-->
-    <color name="app_main_color">#36A4EB</color>
-    <color name="text_gray">#999999</color>
-    <color name="text_black">#333333</color>
+    <!--google推荐MD风格的light blue配色-->
+    <color name="app_main_color">#03A9F4</color>
+    <color name="text_gray">#9E9E9E</color>
+    <color name="text_black">#000000</color>
 </resources>

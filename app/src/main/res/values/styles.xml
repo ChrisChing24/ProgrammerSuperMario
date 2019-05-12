@@ -21,7 +21,6 @@
         <!--TextInputEditText操作时下划线和字体颜色-->
         <item name="colorControlActivated">@color/app_main_color</item>
         <item name="colorControlHighlight">@color/app_main_color</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
     <!--闪屏页主题-->
@@ -68,10 +67,11 @@
     </style>
 
     <!--toolbar 设置右上角设置白色小圆点-->
-    <style name="ToolbarOverflowTheme" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
-        <item name="android:src">@mipmap/ic_menu_more_overflow</item>
+    <style name="ToolbarOverflowTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!--设置toolbarmenu颜色-->
         <item name="android:textColorSecondary">@color/white</item>
-        <item name="android:actionMenuTextColor">@color/white</item>
+        <!--设置toolbar标题颜色-->
+        <item name="android:textColorPrimary">@color/white</item>
     </style>
 
     <!--toolbar popupMenu-->
