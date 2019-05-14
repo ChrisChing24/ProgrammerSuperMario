@@ -20,6 +20,7 @@ import com.white.ghost.programmersupermario.utils.ConstantUtil;
 
 import java.lang.reflect.Method;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -75,7 +76,14 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         mToolbar.setTitle(R.string.home_page);
         mToolbar.setNavigationIcon(R.mipmap.ic_main_navigation);
         setSupportActionBar(mToolbar);
+        //显示箭头
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setOnMenuItemClickListener(this);
+        //设置侧滑栏的开启关闭监听
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,
+                mDrawerLayout, mToolbar, R.string.open_drawer, R.string.close_drawer);
+        drawerToggle.syncState();//使Navigation的图标和箭头切换保持同步
+        mDrawerLayout.addDrawerListener(drawerToggle);
     }
 
     @Override
@@ -117,7 +125,8 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         getMenuInflater().inflate(R.menu.menu_main_toolbar, menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        // TODO: 2019/5/14 设置searchView
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         return super.onCreateOptionsMenu(menu);
     }
 

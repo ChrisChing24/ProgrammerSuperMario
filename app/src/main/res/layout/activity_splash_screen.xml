@@ -37,7 +37,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="50dp"
         android:layout_marginRight="20dp"
-        android:src="@mipmap/ic_right_arrow"
+        android:src="@mipmap/ic_right_arrow_white"
         android:visibility="gone"
         app:backgroundTint="@color/app_main_color"
         app:borderWidth="0dp"

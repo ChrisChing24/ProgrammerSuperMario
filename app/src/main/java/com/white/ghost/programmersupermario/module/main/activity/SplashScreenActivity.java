@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
@@ -47,7 +48,7 @@ import io.reactivex.schedulers.Schedulers;
  * Author Name: Chris
  * Date: 2019/4/30 14:33
  */
-public class SplashScreenActivity extends BaseActivity {
+public class SplashScreenActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
     @BindView(R.id.banner_splash)
     Banner mBanner;
     @BindView(R.id.fab_splash)
@@ -161,6 +162,7 @@ public class SplashScreenActivity extends BaseActivity {
         mBanner.setIndicatorGravity(BannerConfig.CENTER);
         //mBanner设置方法全部调用完毕时最后调用
         mBanner.start();
+        mBanner.setOnPageChangeListener(this);
     }
 
     /**
@@ -219,12 +221,30 @@ public class SplashScreenActivity extends BaseActivity {
     }
 
     @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if (position == mImageList.size() - 1) {
+            mFabSplash.setImageResource(R.mipmap.ic_ok_white);
+        } else {
+            mFabSplash.setImageResource(R.mipmap.ic_right_arrow_white);
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (mDisposable != null && !mDisposable.isDisposed()) {
             mDisposable.dispose();
         }
     }
-
 
 }

@@ -16,4 +16,6 @@
     <string name="quick_meeting">快速会议</string>
     <string name="search">搜索</string>
     <string name="more">更多</string>
+    <string name="open_drawer">打开侧滑栏</string>
+    <string name="close_drawer">关闭侧滑栏</string>
 </resources>

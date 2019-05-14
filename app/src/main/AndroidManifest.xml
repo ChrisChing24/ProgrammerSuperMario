@@ -28,10 +28,7 @@
             android:name=".module.main.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustUnspecified" />
-        <activity android:name=".module.main.activity.MainActivity">
-            <!--设置搜索的内容能传递到SearchActivity-->
-            <meta-data android:name="android.app.default_searchable" />
-        </activity>
+        <activity android:name=".module.main.activity.MainActivity" />
         <!--toolbar上的搜索框点击搜索跳转到搜索界面-->
         <activity android:name=".module.main.activity.SearchActivity">
             <meta-data

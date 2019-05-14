@@ -1,5 +1,6 @@
 package com.white.ghost.programmersupermario.module.main.activity;
 
+import com.white.ghost.programmersupermario.R;
 import com.white.ghost.programmersupermario.base.BaseActivity;
 
 /**
@@ -11,7 +12,7 @@ import com.white.ghost.programmersupermario.base.BaseActivity;
 public class SearchActivity extends BaseActivity {
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.activity_search;
     }
 
     @Override

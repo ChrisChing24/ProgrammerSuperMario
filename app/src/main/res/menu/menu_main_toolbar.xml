@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <!--使用app:showAsAction有效 always表示显示在toolbar上面，但是只显示icon，不显示title-->
-    <!--ifRoom表示显示在三个小点的点击popupMenu中，但是只显示文字，要想显示icon则使用反射-->
+    <!--ifRoom表示有空间则显示，never显示在三个小点的点击popupMenu中，但是只显示文字，
+    要想显示icon则使用反射-->
     <item
         android:id="@+id/search"
         android:icon="@mipmap/ic_search"
         android:title="@string/search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always"
         tools:ignore="AppCompatResource" />
 
