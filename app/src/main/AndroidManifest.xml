@@ -28,7 +28,19 @@
             android:name=".module.main.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustUnspecified" />
-        <activity android:name=".module.main.activity.MainActivity" />
+        <activity android:name=".module.main.activity.MainActivity">
+            <!--设置搜索的内容能传递到SearchActivity-->
+            <meta-data android:name="android.app.default_searchable" />
+        </activity>
+        <!--toolbar上的搜索框点击搜索跳转到搜索界面-->
+        <activity android:name=".module.main.activity.SearchActivity">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
 
     </application>
 

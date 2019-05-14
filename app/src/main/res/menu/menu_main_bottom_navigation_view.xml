@@ -3,16 +3,16 @@
 
     <item
         android:id="@+id/main_bottom_home"
-        android:icon="@drawable/selector_bottom_affair_click"
+        android:icon="@mipmap/ic_home_tab"
         android:title="@string/home_page" />
 
     <item
         android:id="@+id/main_bottom_student"
-        android:icon="@drawable/selector_bottom_student_click"
-        android:title="@string/student" />
+        android:icon="@mipmap/ic_category_tab"
+        android:title="@string/category" />
 
     <item
         android:id="@+id/main_bottom_mine"
-        android:icon="@drawable/selector_bottom_mine_click"
+        android:icon="@mipmap/ic_mine_tab"
         android:title="@string/mine" />
 </menu>

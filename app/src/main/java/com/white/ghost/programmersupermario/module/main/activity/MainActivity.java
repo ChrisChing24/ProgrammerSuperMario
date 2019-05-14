@@ -2,10 +2,11 @@ package com.white.ghost.programmersupermario.module.main.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -19,6 +20,7 @@ import com.white.ghost.programmersupermario.utils.ConstantUtil;
 
 import java.lang.reflect.Method;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -37,8 +39,6 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.fl_content)
-    FrameLayout mFlContent;
     @BindView(R.id.bottom_navigation_view)
     BottomNavigationView mBottomNavigationView;
     @BindView(R.id.navigation_view)
@@ -115,7 +115,10 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_toolbar, menu);
-        return true;
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        return super.onCreateOptionsMenu(menu);
     }
 
     //设置menu弹出item的icon显示
@@ -141,6 +144,9 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.search:
+                startActivity(new Intent(this, SearchActivity.class));
+                break;
             case R.id.main_toolbar_message:
                 break;
             case R.id.main_toolbar_quick_meeting:
@@ -158,21 +164,21 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
                     mHomePageFragment = HomePageFragment.newInstance();
                 }
                 mSelectIndex = 0;
-                switchFragment(item);
+                switchFragment(item, R.string.home_page);
                 break;
             case R.id.main_bottom_student:
                 if (mStudentFragment == null) {
                     mStudentFragment = StudentFragment.newInstance();
                 }
                 mSelectIndex = 1;
-                switchFragment(item);
+                switchFragment(item, R.string.category);
                 break;
             case R.id.main_bottom_mine:
                 if (mMineFragment == null) {
                     mMineFragment = MineFragment.newInstance();
                 }
                 mSelectIndex = 2;
-                switchFragment(item);
+                switchFragment(item, R.string.mine);
                 break;
         }
         return false;
@@ -181,9 +187,10 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     /**
      * 切换显示fragment
      *
-     * @param item 底部导航栏
+     * @param item       底部导航栏
+     * @param titleResId toolbar title
      */
-    private void switchFragment(MenuItem item) {
+    private void switchFragment(MenuItem item, int titleResId) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(mFragments[mCurrentTabIndex]);
         if (!mFragments[mSelectIndex].isAdded()) {
@@ -192,6 +199,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
         transaction.show(mFragments[mSelectIndex]).commit();
         mCurrentTabIndex = mSelectIndex;
         item.setChecked(true);
+        mToolbar.setTitle(titleResId);
     }
 
 
