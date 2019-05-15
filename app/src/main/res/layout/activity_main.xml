@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.white.ghost.programmersupermario.module.main.activity.MainActivity">
 
+    <!--右边界面展示的布局-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/app_main_color"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ToolbarOverflowTheme"
-            app:popupTheme="@style/ToolbarPopupMenuTheme" />
+        <include layout="@layout/layout_toolbar" />
 
         <FrameLayout
             android:id="@+id/fl_content"
@@ -27,21 +20,10 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:itemIconTint="@color/selector_bottom_navigation_view_color"
-            app:itemTextColor="@color/selector_bottom_navigation_view_color"
-            app:menu="@menu/menu_main_bottom_navigation_view" />
+        <include layout="@layout/layout_bottom_navigation_view" />
     </LinearLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="260dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/layout_main_drawer_layout_header" />
+    <!--左边侧滑栏布局-->
+    <include layout="@layout/layout_navigation_view" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

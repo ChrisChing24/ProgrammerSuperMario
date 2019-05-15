@@ -7,7 +7,7 @@
     <!--ifRoom表示有空间则显示，never显示在三个小点的点击popupMenu中，但是只显示文字，
     要想显示icon则使用反射-->
     <item
-        android:id="@+id/search"
+        android:id="@+id/main_toolbar_search"
         android:icon="@mipmap/ic_search"
         android:title="@string/search"
         app:showAsAction="always"

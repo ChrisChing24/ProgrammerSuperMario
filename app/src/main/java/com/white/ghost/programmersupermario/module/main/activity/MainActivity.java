@@ -2,8 +2,6 @@ package com.white.ghost.programmersupermario.module.main.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +19,6 @@ import com.white.ghost.programmersupermario.utils.ConstantUtil;
 import java.lang.reflect.Method;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -88,6 +85,9 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
 
     @Override
     public void initViews() {
+        mNavigationView.inflateMenu(R.menu.menu_main_drawer_navigation_view);
+        mNavigationView.inflateHeaderView(R.layout.layout_main_drawer_layout_header);
+        mBottomNavigationView.inflateMenu(R.menu.menu_main_bottom_navigation_view);
         mNavigationView.setNavigationItemSelectedListener(this);
         mBottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
@@ -123,10 +123,6 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_toolbar, menu);
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        // TODO: 2019/5/14 设置searchView
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -153,7 +149,7 @@ public class MainActivity extends BaseActivity implements Toolbar.OnMenuItemClic
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.search:
+            case R.id.main_toolbar_search:
                 startActivity(new Intent(this, SearchActivity.class));
                 break;
             case R.id.main_toolbar_message:

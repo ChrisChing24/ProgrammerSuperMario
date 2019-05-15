@@ -72,6 +72,10 @@
         <item name="android:textColorSecondary">@color/white</item>
         <!--设置toolbar标题颜色-->
         <item name="android:textColorPrimary">@color/white</item>
+        <!--NavigationIcon和标题之间的距离-->
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+
     </style>
 
     <!--toolbar popupMenu-->
