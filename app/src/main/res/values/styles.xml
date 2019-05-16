@@ -9,7 +9,6 @@
     </style>
 
     <style name="BaseAppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -75,7 +74,6 @@
         <!--NavigationIcon和标题之间的距离-->
         <item name="contentInsetStart">0dp</item>
         <item name="contentInsetStartWithNavigation">0dp</item>
-
     </style>
 
     <!--toolbar popupMenu-->
